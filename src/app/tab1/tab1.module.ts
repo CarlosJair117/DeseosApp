@@ -6,7 +6,6 @@ import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import { DeseosService } from '../services/deseos.service';
 
 @NgModule({
   imports: [
@@ -18,10 +17,13 @@ import { DeseosService } from '../services/deseos.service';
   ],
   declarations: [Tab1Page]
 })
+
+
+
 export class Tab1PageModule {
 
-  constructor( public deseosService: DeseosService ){
-    
+  constructor(  ){
   }
+  
 
 }
