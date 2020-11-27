@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { DeseosService } from 'src/app/services/deseos.service';
+import { ListaItem } from '../models/lista-item.model';
+import { Lista } from '../models/lista.model';
 
 @Component({
   selector: 'app-agregar',
@@ -7,9 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgregarPage implements OnInit {
 
-  constructor() { }
+  lista: Lista;
+  nombreItem = '';
+
+  constructor( private deseosService: DeseosService, private route: ActivatedRoute ) {
+    const listaId = this.route.snapshot.paramMap.get('listaId');
+    this.lista = this.deseosService.obtenerLista(listaId);
+   }
 
   ngOnInit() {
+  }
+
+  agragarItem(){
+
+    if (this.nombreItem.length === 0){
+      return;
+    }
+
+    const nuevoItem = new ListaItem(this.nombreItem);
+    this.lista.items.push(nuevoItem);
+
+    this.nombreItem = '';
+    this.deseosService.guardarStorage();
   }
 
 }
